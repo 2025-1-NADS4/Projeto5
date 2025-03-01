@@ -47,11 +47,11 @@
 <b><a href="https://alpine-cork-54d.notion.site/PI-Aplicativo-Mobile-7244bdbd83034526abf24079a646da7b?pvs=4">Notion</a></b>
 
 ## 📂 Documentos:
-- <b><a </a></b>
-- <b><a </a></b>
-- <b><a >Personas</a></b>
-- <b><a >User Storie</a></b>
-- <b><a </a></b>
+- <b></a></b>
+- <b> </a></b>
+- <b>></a></b>
+- <b></a></b>
+- <b></a></b>
 
 
 
