@@ -42,14 +42,14 @@
 
 ## 🛠 Acesso
 
-<b><a href="https://www.figma.com/design/B5mBc04JXVIKuqE1drn8Vb/Prot%C3%B3tipo-App-FOODWISE?node-id=0-1">Figma</a></b>
+<b></a></b>
 
-<b><a href="https://alpine-cork-54d.notion.site/PI-Aplicativo-Mobile-7244bdbd83034526abf24079a646da7b?pvs=4">Notion</a></b>
+<b></b>
 
 ## 📂 Documentos:
 - <b></a></b>
 - <b> </a></b>
-- <b>></a></b>
+- <b></a></b>
 - <b></a></b>
 - <b></a></b>
 
@@ -58,9 +58,9 @@
 ## 💻 Configuração para Desenvolvimento
 Para executar este projeto, são necessárias as seguintes ferramentas:
 
-<b><a href="https://developer.android.com/studio?gad_source=1&gclid=Cj0KCQjwmOm3BhC8ARIsAOSbapXinE3_OX-JtdmdOZ5dpXf-9fcQUkVSaQjmGKnExcd1RtIx_rj4KBoaAkupEALw_wcB&gclsrc=aw.ds&hl=pt-br">Android Studio</a></b>
+<b></a></b>
 
-<b><a href="https://dev.mysql.com/downloads/workbench/">My.Sql</a></b>
+<b></a></b>
 
 
 
