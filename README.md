@@ -16,7 +16,7 @@
 
 ## Descrição:
 
-<br><br>
+<br>O Compara Drive é um projeto que criado para ajudar as pessoas a economizar nas corridas de apps. Com Python, Big Data e Machine Learning, ele analisa os preços em tempo real e mostra qual é a opção mais barata na hora.<br>
 
 ## 🛠 Estrutura de pastas
 
