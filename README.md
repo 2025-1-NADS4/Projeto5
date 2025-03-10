@@ -13,7 +13,7 @@
 
 
 <p align="center">
-<img src="https://i.imgur.com/3osMOFB.jpeg" border="0">
+<img src="https://i.imgur.com/3osMOFB.jpeg" alt="Colorful-Illustration-Healthy-Food-Planner-Presentation" border="0">
 
 ## Descrição:
 
