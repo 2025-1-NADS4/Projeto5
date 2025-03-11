@@ -69,12 +69,12 @@ A cada atualização os detalhes devem ser lançados aqui.
 * 0.2.1 - 20/08/2024
     * Inicio do desenvolvimento no Android Studio.
     * Desenvolvendo as telas de "inicio" e "login".
-* 0.2.0 - 13/08/2024
+* 0.2.0 - /08/2024
     * Definir cores e design.
-* 0.1.1 - 08/08/2024
-    * Definição do Tema.
-* 0.0.1 - 06/08/2024
-    * Trabalho em andamento.
+* 0.1.1 - 17/02/2024
+    * Divisão das tarefas.
+* 0.0.1 -  15/02/2025
+    * Início do trabalho.
 
 ## 📋 Licença/License
 <p></a></p>
