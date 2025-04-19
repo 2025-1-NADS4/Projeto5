@@ -79,7 +79,7 @@ A cada atualização os detalhes devem ser lançados aqui.
     * Início do planejamento do projeto.
 
 ## 📋 Licença/License
-<p></a></p>
+<p>ComparaDrive © 2025 by Gustavo Araujo, Emilly Depine, Fernando José, Renan Teixeira is licensed under CC BY-NC-SA 4.0 </a></p>
 
 ## 🎓 Referências
 
