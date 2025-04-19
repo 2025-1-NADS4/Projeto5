@@ -24,14 +24,8 @@
 
 |-->documentos<br>
   &emsp;|-->antigos<br>
-  
-|-->executáveis<br>
-  &emsp;|-->android<br>
-  &emsp;|-->HTML<br>
-  
 |-->imagens<br>
   &emsp;|-->
-
 |-->src<br>
   &emsp;|-->Backend<br>
 
