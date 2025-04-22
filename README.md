@@ -25,16 +25,11 @@
 |-->documentos<br>
   &emsp;|-->antigos<br>
   
-|-->executáveis<br>
-  &emsp;|-->android<br>
-  &emsp;|-->HTML<br>
-  
 |-->imagens<br>
-  &emsp;|-->
 
 |-->src<br>
   &emsp;|-->Backend<br>
-
+  
   &emsp;|-->Frontend<br>
 
 
@@ -66,18 +61,25 @@ Para executar este projeto, são necessárias as seguintes ferramentas:
 
 A cada atualização os detalhes devem ser lançados aqui.
 
-* 0.2.1 - 20/08/2024
-    * Inicio do desenvolvimento no Android Studio.
-    * Desenvolvendo as telas de "inicio" e "login".
-* 0.2.0 - /08/2024
-    * Definir cores e design.
-* 0.1.1 - 17/02/2024
+* 0.2.4 - 08/04/2025
+    * Desenvolvimento do sistema
+* 0.2.3 - 02/04/2025
+    * Execução e testes com inteligência artificial
+* 0.2.2 - 29/03/2025
+    * Início da análise e leitura da base de dados
+* 0.2.1 - 15/03/2025
+    * Início do desenvolvimento do layout do sistema
+* 0.1.1 - 11/03/2025
+    * Entrega dos primeiros documentos
+* 0.0.3 - 20/02/2025
+    * Início da execução
+* 0.0.2 - 17/02/2025
     * Divisão das tarefas.
 * 0.0.1 -  15/02/2025
-    * Início do trabalho.
+    * Início do planejamento do projeto.
 
 ## 📋 Licença/License
-<p></a></p>
+<p>ComparaDrive © 2025 by Gustavo Araujo, Emilly Depine, Fernando José, Renan Teixeira is licensed under CC BY-NC-SA 4.0 </a></p>
 
 ## 🎓 Referências
 
