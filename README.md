@@ -52,7 +52,10 @@
 Para executar este projeto, são necessárias as seguintes ferramentas:
 
 <b></a></b>
-
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+- [Python](https://www.python.org/)
+- [Jupyter Notebook](https://jupyter.org/)
 <b></a></b>
 
 
