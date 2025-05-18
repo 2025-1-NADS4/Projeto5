@@ -62,20 +62,28 @@ Para executar este projeto, são necessárias as seguintes ferramentas:
 
 ## 🗃 Histórico de lançamentos
 
-A cada atualização os detalhes devem ser lançados aqui.
-
+* 0.4.1 - 17/05/2025
+    * Finalização da API e do projeto.
+* 0.4.1 - 15/05/2025
+    * Finalização do modelo de Machine Learning.
+* 0.4.1 - 12/05/2025
+    * Finalização da documentação de gestão do Software.
+* 0.3.1 - 28/04/2025
+    * Mudança do modelo de Machine Learning.
+* 0.2.5 - 19/04/2025
+    * Finalização do front-end do sistema.
 * 0.2.4 - 08/04/2025
-    * Desenvolvimento do sistema
+    * Desenvolvimento do sistema.
 * 0.2.3 - 02/04/2025
-    * Execução e testes com inteligência artificial
+    * Execução e testes com inteligência artificial.
 * 0.2.2 - 29/03/2025
-    * Início da análise e leitura da base de dados
+    * Início da análise e leitura da base de dados.
 * 0.2.1 - 15/03/2025
-    * Início do desenvolvimento do layout do sistema
+    * Início do desenvolvimento do layout do sistema.
 * 0.1.1 - 11/03/2025
-    * Entrega dos primeiros documentos
+    * Entrega dos primeiros documentos.
 * 0.0.3 - 20/02/2025
-    * Início da execução
+    * Início da execução.
 * 0.0.2 - 17/02/2025
     * Divisão das tarefas.
 * 0.0.1 -  15/02/2025
@@ -88,7 +96,8 @@ A cada atualização os detalhes devem ser lançados aqui.
 
 Aqui estão as referências usadas no projeto:
 
-1. 
-2.
-3. 
-4. 
+1. https://github.com/iuricode/readme-template  
+2. https://github.com/gabrieldejesus/readme-model  
+3. https://creativecommons.org/share-your-work/  
+4. https://getbootstrap.com/  
+
