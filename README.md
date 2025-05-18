@@ -62,9 +62,9 @@ Para executar este projeto, são necessárias as seguintes ferramentas:
 
 ## 🗃 Histórico de lançamentos
 
-* 0.4.1 - 17/05/2025
+* 0.4.3 - 17/05/2025
     * Finalização da API e do projeto.
-* 0.4.1 - 15/05/2025
+* 0.4.2 - 15/05/2025
     * Finalização do modelo de Machine Learning.
 * 0.4.1 - 12/05/2025
     * Finalização da documentação de gestão do Software.
