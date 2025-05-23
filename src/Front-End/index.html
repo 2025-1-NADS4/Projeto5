@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparadrive</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Monoton&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+  <style>
+    body { 
+      margin: 0; 
+      padding: 0; 
+      background-color: #0e1a2b; 
+      color: white; 
+      font-family: 'DM Sans', sans-serif; 
+      overflow-x: hidden; 
+    }
+    .titulo { font-family: 'Monoton', cursive; font-size: 96px; text-align: center; margin-bottom: 10px; }
+    /* --- ESTILO DO SUBTÍTULO ATUALIZADO --- */
+    .subtitulo { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      font-size: 99px; /* Tamanho atualizado */
+      font-weight: bold; 
+      text-align: center; 
+      margin-bottom: 20px; 
+      color: #B1C9ED; /* Cor atualizada */
+    }
+    .descricao-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; padding: 0 50px; }
+    /* --- ESTILO DA DESCRIÇÃO ATUALIZADO --- */
+    .descricao { 
+      font-size: 24px; /* Tamanho atualizado */
+      font-family: 'DM Sans', sans-serif; /* Fonte reafirmada */
+      text-align: left; 
+      line-height: 1.5; 
+      max-width: 600px; 
+    }
+    .imagem { width: 550px; height: auto; object-fit: contain; }
+    
+    .secao-busca { 
+      background-color: rgba(177, 201, 237, 0.35); 
+      border-radius: 30px; 
+      padding: 30px 25px; 
+      text-align: center; 
+      margin: 37.5px 50px 0 50px; 
+      position: relative; 
+      overflow: hidden; /* Mantido para cortar qualquer conteúdo interno que possa vazar */
+      z-index: 0; 
+    }
+    /* Removido .secao-busca::before e .ellipse-bg, .ellipse-2, .ellipse-3 */
+
+    .secao-busca h3 { 
+      font-size: 32px; 
+      margin-bottom: 30px; 
+      color: #FFF; 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      font-weight: bold; 
+      position: relative; 
+      z-index: 1; 
+    }
+    
+    .inputs {
+      display: flex;
+      flex-direction: row; 
+      flex-wrap: wrap;     
+      gap: 20px;          
+      justify-content: center; 
+      align-items: flex-start; 
+      margin-bottom: 25px;
+      position: relative; 
+      z-index: 1; 
+    }
+    .input-container { 
+        position: relative; 
+        min-width: 250px;  
+        flex: 1 1 280px; 
+        margin-bottom: 10px; 
+    }
+
+    .inputs input, .inputs select {
+      padding: 18px 20px; 
+      border: none; 
+      border-radius: 25px; 
+      font-size: 18px;
+      background-color: rgba(255, 255, 255, 0.15); 
+      width: 100%; 
+      color: #fff; 
+      box-sizing: border-box; 
+    }
+    .inputs select {
+        min-width: auto; 
+        appearance: none; -webkit-appearance: none; -moz-appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat; background-position: right 20px center; 
+        background-size: 12px auto; padding-right: 45px; 
+    }
+    .inputs select option { background-color: #0e1a2b; color: #fff; }
+    .inputs input::placeholder { color: #e0e0e0; opacity: 1; } 
+
+    .botao { 
+      padding: 18px 35px; 
+      font-size: 18px; 
+      background-color: #1a75ff; 
+      color: white; 
+      border: none; 
+      border-radius: 25px; 
+      cursor: pointer; 
+      transition: background-color 0.3s ease; 
+      margin-top: 10px; 
+      font-weight: bold;
+      position: relative; 
+      z-index: 1; 
+    }
+    .botao:hover { background-color: #0056e0; }
+
+    .sugestoes-dropdown {
+        position: absolute; background-color: #1c2a3f; border: 1px solid rgba(177, 201, 237, 0.5); 
+        border-top: none; z-index: 999; 
+        max-height: 200px; overflow-y: auto;
+        width: 100%; border-radius: 0 0 20px 20px; 
+        box-sizing: border-box; display: none;
+        margin-top: -10px; 
+        padding-top: 10px; 
+    }
+    .sugestoes-dropdown div { padding: 10px 20px; cursor: pointer; color: #fff; font-size: 16px; }
+    .sugestoes-dropdown div:hover { background-color: #2a3f5c; }
+
+    #resultado-unico-container { text-align: center; margin: 30px 50px 20px 50px; font-size: 18px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; }
+    #resultado-unico-container p { margin: 10px 0; }
+    #info-viagem { font-weight: bold; color: #B1C9ED; }
+    #preco-resultado { font-size: 22px; font-weight: bold; color: #1effa1; }
+    
+    #mapa-here-container { margin: 30px 50px; text-align: center; }
+    #mapa-here-container h3 { color: #B1C9ED; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: bold; margin-bottom:15px;}
+    #mapaHere { 
+        width: 100%; 
+        height: 450px; 
+        background-color: #333;
+        border-radius: 20px; 
+        overflow: hidden; 
+    }
+
+    .resultados { 
+        margin: 40px 50px 0 50px;
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 20px; 
+        justify-content: center; 
+    }
+    .card { 
+        background-color: rgba(255, 255, 255, 0.05); 
+        border-radius: 15px; 
+        padding: 20px; 
+        margin-bottom: 20px; 
+        width: calc(33.333% - 20px); 
+        min-width: 280px; 
+        box-sizing: border-box; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .card img { 
+        width: 220px; 
+        height: 89px;  
+        border-radius: 10px; 
+        object-fit: contain; 
+        margin-bottom: 15px;
+    }
+    .card p { 
+        text-align: center; 
+        font-size: 16px; 
+        line-height: 1.4; 
+        font-weight: normal; 
+        width: 100%; 
+    }
+    .card p .calculando-card { font-style: italic; color: #aaa; } 
+    .card p strong { font-weight: bold; } 
+
+    .footer { margin-top: 60px; padding: 40px 50px; background-color: #0b1522; display: flex; flex-wrap: wrap; justify-content: space-between; color: white; font-size: 14px; }
+    .footer div { margin: 10px 0; min-width: 200px; }
+  </style>
+</head>
+<body>
+  <h1 class="titulo">Comparadrive</h1>
+
+  <div class="descricao-container">
+    <div class="descricao">
+      Nosso site tem como objetivo facilitar a vida dos usuários ao comparar os preços dos principais aplicativos de transporte. Sabemos que os valores podem variar de acordo com a região, o horário e a demanda, por isso oferecemos uma ferramenta prática e intuitiva para que você encontre a opção mais acessível para o seu trajeto. Dessa forma, você economiza tempo e dinheiro ao escolher a melhor alternativa para se locomover com conforto e segurança.
+    </div>
+    <img src="/images/img_compara.png" alt="Imagem Comparação" class="imagem">
+  </div>
+
+  <div class="secao-busca"> 
+    <h3>Detalhes da Viagem:</h3>
+    <div class="inputs">
+      <div class="input-container">
+        <input type="text" id="origem" placeholder="Local de partida" autocomplete="off">
+        <div id="sugestoes-origem" class="sugestoes-dropdown"></div>
+      </div>
+      <div class="input-container">
+        <input type="text" id="destino" placeholder="Destino final" autocomplete="off">
+        <div id="sugestoes-destino" class="sugestoes-dropdown"></div>
+      </div>
+      <div class="input-container">
+        <select id="categoria">
+            <option value="" disabled selected>Selecione a Categoria Principal</option>
+            <option value="UberX">UberX</option>
+            <option value="Comfort">Comfort (Uber)</option>
+            <option value="Black">Black (Uber)</option>
+        </select>
+      </div>
+    </div>
+    <button class="botao" type="button">Comparar Preços</button> 
+  </div>
+
+  <div id="resultado-unico-container">
+      <p id="info-viagem"></p>
+      <p id="preco-resultado"></p>
+  </div>
+
+  <div id="mapa-here-container">
+      <h3>Trajeto Estimado no Mapa:</h3>
+      <div id="mapaHere"></div>
+  </div>
+
+  <div class="resultados">
+    <div class="card">
+      <img src="/images/uber-logo.png" alt="Logo Uber">
+      <p id="preco-uber">* Preço Sugerido:</p>
+    </div>
+    <div class="card">
+      <img src="/images/99-logo.png" alt="Logo 99">
+      <p id="preco-99">* Preço Sugerido:</p>
+    </div>
+    <div class="card">
+      <img src="/images/logo-taxi.png" alt="Logo Táxi"> 
+      <p id="preco-taxi">* Preço Sugerido:</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div><strong>CD</strong><br>Por Renan Teixeira, <br>Fernando José <br>Emilly Depine<br>Gustavo Henrique.</div>
+    <div><strong>OFFICE</strong><br>123 Innovation Drive<br>Palo Alto, CA 94301 <br>Silicon Valley, USA</div>
+    <div><strong>MENU</strong><br>Serviço<br>Parcerias</div>
+    <div><div><strong>LINKS</strong><br><a href="/pages/pg2.html" style="color: white; text-decoration: none;">Sobre Nós</a><br><a href="#" style="color: white; text-decoration: none;">Contato</a><br><a href="#" style="color: white; text-decoration: none;">Central de Ajuda</a></div></div>
+  </footer>
+
+<script>
+    // --- LÓGICA PARA AUTOCOMPLETE COM NOMINATIM ---
+    function debounce(func, delay) { 
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+    const inputOrigem = document.getElementById('origem');
+    const sugestoesOrigemDiv = document.getElementById('sugestoes-origem');
+    const inputDestino = document.getElementById('destino');
+    const sugestoesDestinoDiv = document.getElementById('sugestoes-destino');
+    async function carregarSugestoes(inputValue, sugestoesDiv, inputElement) { 
+        if (inputValue.length < 3) {
+            sugestoesDiv.innerHTML = ''; sugestoesDiv.style.display = 'none'; return;
+        }
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/api/nominatim-suggest?q=${encodeURIComponent(inputValue)}`);
+            if (!response.ok) {
+                console.error(`Erro da API Nominatim (Flask): ${response.status} ${response.statusText}`);
+                sugestoesDiv.innerHTML = ''; sugestoesDiv.style.display = 'none'; return;
+            }
+            const sugestoes = await response.json();
+            sugestoesDiv.innerHTML = '';
+            if (sugestoes && sugestoes.length > 0) {
+                sugestoes.forEach(sugestao => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.textContent = sugestao.display_name;
+                    itemDiv.addEventListener('click', () => {
+                        inputElement.value = sugestao.display_name;
+                        sugestoesDiv.innerHTML = ''; sugestoesDiv.style.display = 'none';
+                    });
+                    sugestoesDiv.appendChild(itemDiv);
+                });
+                sugestoesDiv.style.display = 'block';
+            } else {
+                sugestoesDiv.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Erro ao buscar sugestões (Nominatim):', error);
+            sugestoesDiv.innerHTML = ''; sugestoesDiv.style.display = 'none';
+        }
+    }
+    const debouncedCarregarSugestoesOrigem = debounce((value) => carregarSugestoes(value, sugestoesOrigemDiv, inputOrigem), 350);
+    const debouncedCarregarSugestoesDestino = debounce((value) => carregarSugestoes(value, sugestoesDestinoDiv, inputDestino), 350);
+    if (inputOrigem) inputOrigem.addEventListener('input', (e) => debouncedCarregarSugestoesOrigem(e.target.value));
+    if (inputDestino) inputDestino.addEventListener('input', (e) => debouncedCarregarSugestoesDestino(e.target.value));
+    document.addEventListener('click', function(event) { 
+        if (sugestoesOrigemDiv && !sugestoesOrigemDiv.contains(event.target) && event.target !== inputOrigem) {
+            sugestoesOrigemDiv.style.display = 'none';
+        }
+        if (sugestoesDestinoDiv && !sugestoesDestinoDiv.contains(event.target) && event.target !== inputDestino) {
+            sugestoesDestinoDiv.style.display = 'none';
+        }
+    });
+
+
+    // --- LÓGICA PARA MAPA HERE ---
+    let platformHere = null;
+    let mapHere = null;
+    let currentRouteGroup = null;
+    const HERE_API_KEY_JS = "zK9f9fu8wVtDG9dCY4fUvfpO6K4LDdRYtQupwo89fQ4"; 
+
+    function checkHereAPILoaded() {
+        if (typeof H === 'undefined' || !H.service || !H.Map || !H.geo || !H.mapevents) {
+            console.error("HERE Maps API (objeto H ou seus componentes) não carregou corretamente.");
+            const mapaDiv = document.getElementById('mapaHere');
+            if (mapaDiv) mapaDiv.innerHTML = '<p style="color:red;text-align:center;padding-top:50px;">Erro ao carregar a API de Mapas.</p>';
+            return false;
+        }
+        console.log("API da HERE Maps (objeto H) carregada com sucesso.");
+        return true;
+    }
+
+    function inicializarMapaHere(lat, lng, zoom = 12) {
+        if (!checkHereAPILoaded()) return; 
+        if (mapHere || !document.getElementById('mapaHere')) {
+            return; 
+        }
+        try {
+            platformHere = new H.service.Platform({ 'apikey': HERE_API_KEY_JS });
+            const defaultLayers = platformHere.createDefaultLayers();
+            mapHere = new H.Map(
+                document.getElementById('mapaHere'),
+                defaultLayers.vector.normal.map,
+                { zoom: zoom, center: { lat: lat, lng: lng }, pixelRatio: window.devicePixelRatio || 1 }
+            );
+            const mapEvents = new H.mapevents.MapEvents(mapHere);
+            new H.mapevents.Behavior(mapEvents);
+            window.addEventListener('resize', () => { if (mapHere) mapHere.getViewPort().resize(); });
+            currentRouteGroup = new H.map.Group();
+            mapHere.addObject(currentRouteGroup);
+            console.log("Mapa HERE inicializado em:", lat, lng);
+        } catch(e) {
+            console.error("Erro DETALHADO ao inicializar mapa HERE:", e);
+            const mapaDiv = document.getElementById('mapaHere');
+            if (mapaDiv) mapaDiv.innerHTML = '<p style="color:red;text-align:center;padding-top:50px;">Erro crítico ao inicializar o mapa.</p>';
+        }
+    }
+
+    function desenharRotaHere(polylineString, originCoords, destCoords) {
+        if (!checkHereAPILoaded() || !mapHere) {
+            console.error("Função desenharRotaHere chamada, mas API HERE ou mapa não está inicializado.");
+            return; 
+        }
+        if (currentRouteGroup) { currentRouteGroup.removeAll(); } 
+        else { 
+            currentRouteGroup = new H.map.Group(); 
+            mapHere.addObject(currentRouteGroup); 
+        }
+        
+        if (!polylineString || typeof polylineString !== 'string' || polylineString.trim() === "") { 
+            console.warn("Polyline da rota não recebida, inválida ou vazia. Não é possível desenhar a rota."); 
+            return; 
+        }
+        try {
+            const lineString = H.geo.LineString.fromFlexiblePolyline(polylineString);
+            const routeLine = new H.map.Polyline(lineString, { style: { strokeColor: 'blue', lineWidth: 5 } });
+            
+            const originMarker = new H.map.Marker({ lat: originCoords.lat, lng: originCoords.lng });
+            const destMarker = new H.map.Marker({ lat: destCoords.lat, lng: destCoords.lng });
+            
+            currentRouteGroup.addObjects([routeLine, originMarker, destMarker]);
+            mapHere.getViewModel().setLookAtData({ bounds: currentRouteGroup.getBoundingBox() });
+            console.log("Rota desenhada no mapa HERE.");
+        } catch (error) { 
+            console.error("Erro DETALHADO ao desenhar rota no mapa HERE:", error); 
+        }
+    }
+
+    // --- FUNÇÃO BUSCARPRECOS ATUALIZADA ---
+    async function buscarPrecos(eventParam) { 
+        if (eventParam) { 
+            eventParam.preventDefault(); 
+        }
+        const origem = document.getElementById("origem").value;
+        const destino = document.getElementById("destino").value;
+        const categoriaSelecionada = document.getElementById("categoria").value; 
+
+        const infoViagemElement = document.getElementById("info-viagem");
+        const precoResultadoElement = document.getElementById("preco-resultado");
+        const preco99Element = document.getElementById("preco-99");
+        const precoUberElement = document.getElementById("preco-uber");
+        const precoTaxiElement = document.getElementById("preco-taxi");
+
+        infoViagemElement.textContent = "";
+        precoResultadoElement.textContent = "Consultando...";
+        if (precoUberElement) precoUberElement.innerHTML = "* Preço Sugerido: <span class='calculando-card'>Calculando Uber...</span>";
+        if (preco99Element) preco99Element.innerHTML = "* Preço Sugerido: <span class='calculando-card'>Calculando 99Pop...</span>";
+        if (precoTaxiElement) precoTaxiElement.innerHTML = "* Preço Sugerido: <span class='calculando-card'>Calculando Táxi...</span>";
+
+        if (mapHere && currentRouteGroup) {
+            currentRouteGroup.removeAll(); 
+        }
+        
+        if (!origem || !destino || !categoriaSelecionada) {
+            alert("Por favor, preencha todos os campos: origem, destino e categoria principal.");
+            precoResultadoElement.textContent = ""; 
+            if (precoUberElement) precoUberElement.innerHTML = "* Preço Sugerido:";
+            if (preco99Element) preco99Element.innerHTML = "* Preço Sugerido:";
+            if (precoTaxiElement) precoTaxiElement.innerHTML = "* Preço Sugerido:";
+            return;
+        }
+
+        async function fetchPrecoParaCategoria(cat) { 
+            const requestBody = {
+                endereco_origem: origem,
+                endereco_destino: destino,
+                categoria: cat 
+            };
+            try {
+                const response = await fetch("http://127.0.0.1:5000/api/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(requestBody)
+                });
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    const data = await response.json();
+                    return { success: response.ok, data: data, categoriaOriginal: cat };
+                } else {
+                    const textError = await response.text();
+                    console.error(`Resposta não JSON da API para categoria ${cat}:`, textError);
+                    return { success: false, data: { error: "Resposta inválida da API" }, categoriaOriginal: cat };
+                }
+            } catch (error) {
+                console.error(`Erro de fetch para categoria ${cat}:`, error);
+                if (cat === categoriaSelecionada) {
+                    precoResultadoElement.textContent = `Erro de conexão com a API. Verifique se o servidor Flask está rodando.`;
+                }
+                return { success: false, data: { error: "Erro de comunicação" }, categoriaOriginal: cat };
+            }
+        }
+
+        const categoriasParaCardUber = [
+            { valorApi: "UberX", nomeExibicao: "UberX" },
+            { valorApi: "Comfort", nomeExibicao: "Comfort" },
+            { valorApi: "Black", nomeExibicao: "Black" }
+        ];
+        const categoriaParaCard99 = { valorApi: "pop99", nomeExibicao: "99Pop" }; 
+        const categoriaParaCardTaxi = { valorApi: "Taxi", nomeExibicao: "Táxi Comum" }; 
+
+        const promessasDePreco = [];
+        promessasDePreco.push(fetchPrecoParaCategoria(categoriaSelecionada));
+
+        categoriasParaCardUber.forEach(catInfoUber => {
+            if (categoriaSelecionada !== catInfoUber.valorApi) { 
+                 promessasDePreco.push(fetchPrecoParaCategoria(catInfoUber.valorApi));
+            }
+        });
+        
+        promessasDePreco.push(fetchPrecoParaCategoria(categoriaParaCard99.valorApi)); 
+        promessasDePreco.push(fetchPrecoParaCategoria(categoriaParaCardTaxi.valorApi)); 
+        
+        try {
+            const todosOsResultados = await Promise.all(promessasDePreco);
+
+            const resultadoPrincipal = todosOsResultados.find(res => res.categoriaOriginal === categoriaSelecionada);
+            if (resultadoPrincipal && resultadoPrincipal.success) {
+                const dados = resultadoPrincipal.data;
+                infoViagemElement.textContent = 
+                    `Viagem de ${dados.endereco_origem} para ${dados.endereco_destino} (${dados.categoria_viagem}) - ${dados.distancia_km} km, ${dados.duracao_min} min.`;
+                precoResultadoElement.textContent = 
+                    `Preço Estimado: R$ ${dados.predicted_price.toFixed(2)}`;
+
+                if (dados.route_polyline && dados.origin_coords && dados.destination_coords) {
+                    if (!mapHere) inicializarMapaHere(dados.origin_coords.lat, dados.origin_coords.lng);
+                    if (mapHere) desenharRotaHere(dados.route_polyline, dados.origin_coords, dados.destination_coords);
+                } else { console.warn("Dados de rota insuficientes para mapa (principal)."); }
+            } else if (resultadoPrincipal) {
+                precoResultadoElement.textContent = `Erro na previsão: ${resultadoPrincipal.data.error || "N/A"}`;
+                console.error("Erro da API de previsão (principal):", resultadoPrincipal.data);
+            }
+            
+            let htmlPrecosUber = "* Preço Sugerido:<br>";
+            let encontrouPrecoUberValido = false;
+            categoriasParaCardUber.forEach(catInfoUber => {
+                let resultadoUber = todosOsResultados.find(res => res.categoriaOriginal === catInfoUber.valorApi);
+                if (resultadoUber && resultadoUber.success) {
+                    htmlPrecosUber += `<strong>${catInfoUber.nomeExibicao}</strong>: R$ ${resultadoUber.data.predicted_price.toFixed(2)}<br>`;
+                    encontrouPrecoUberValido = true;
+                } else if (resultadoUber) {
+                    htmlPrecosUber += `<strong>${catInfoUber.nomeExibicao}</strong>: Erro (${resultadoUber.data.error || 'N/A'})<br>`;
+                } else {
+                     if (categoriaSelecionada === catInfoUber.valorApi && resultadoPrincipal && resultadoPrincipal.success) {
+                        htmlPrecosUber += `<strong>${catInfoUber.nomeExibicao}</strong>: R$ ${resultadoPrincipal.data.predicted_price.toFixed(2)}<br>`;
+                        encontrouPrecoUberValido = true;
+                     } else if (categoriaSelecionada === catInfoUber.valorApi && resultadoPrincipal) {
+                        htmlPrecosUber += `<strong>${catInfoUber.nomeExibicao}</strong>: Erro (${resultadoPrincipal.data.error || 'N/A'})<br>`;
+                     } else {
+                        htmlPrecosUber += `<strong>${catInfoUber.nomeExibicao}</strong>: Não consultado<br>`;
+                     }
+                }
+            });
+            if (precoUberElement) precoUberElement.innerHTML = htmlPrecosUber;
+
+            const resultado99Pop = todosOsResultados.find(res => res.categoriaOriginal === categoriaParaCard99.valorApi);
+            if (preco99Element) {
+                if (resultado99Pop && resultado99Pop.success) {
+                    preco99Element.innerHTML = `* Preço Sugerido:<br><strong>${categoriaParaCard99.nomeExibicao}</strong>: R$ ${resultado99Pop.data.predicted_price.toFixed(2)}`;
+                } else if (resultado99Pop) {
+                    preco99Element.innerHTML = `* Preço Sugerido:<br><strong>${categoriaParaCard99.nomeExibicao}</strong>: Erro (${resultado99Pop.data.error || 'N/A'})`;
+                } else {
+                    preco99Element.innerHTML = `* Preço Sugerido:<br><strong>${categoriaParaCard99.nomeExibicao}</strong>: Falha na consulta`;
+                }
+            }
+
+            const resultadoTaxi = todosOsResultados.find(res => res.categoriaOriginal === categoriaParaCardTaxi.valorApi);
+            if (precoTaxiElement) {
+                if (resultadoTaxi && resultadoTaxi.success) {
+                    precoTaxiElement.innerHTML = `* Preço Sugerido:<br><strong>${categoriaParaCardTaxi.nomeExibicao}</strong>: R$ ${resultadoTaxi.data.predicted_price.toFixed(2)}`;
+                } else if (resultadoTaxi) {
+                    precoTaxiElement.innerHTML = `* Preço Sugerido:<br><strong>${categoriaParaCardTaxi.nomeExibicao}</strong>: Erro (${resultadoTaxi.data.error || 'N/A'})`;
+                } else {
+                    precoTaxiElement.innerHTML = `* Preço Sugerido:<br><strong>${categoriaParaCardTaxi.nomeExibicao}</strong>: Falha na consulta`;
+                }
+            }
+
+        } catch (error) { 
+            console.error("Erro geral ao buscar e processar todos os preços:", error);
+            precoResultadoElement.textContent = "Erro de comunicação geral. Tente novamente.";
+            if (precoUberElement) precoUberElement.innerHTML = "* Preço Sugerido: Erro de comunicação.";
+            if (preco99Element) preco99Element.innerHTML = "* Preço Sugerido: Erro de comunicação.";
+            if (precoTaxiElement) precoTaxiElement.innerHTML = "* Preço Sugerido: Erro de comunicação.";
+        }
+    }
+    
+    const botaoComparar = document.querySelector(".botao");
+    if (botaoComparar) {
+        botaoComparar.addEventListener("click", function(eventDoClique) { 
+            if (eventDoClique) {
+                eventDoClique.preventDefault();
+            }
+            buscarPrecos(eventDoClique); 
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        if (checkHereAPILoaded()) { 
+            inicializarMapaHere(-23.5505, -46.6333, 10); 
+        }
+    });
+  </script>
+</body>
+</html>

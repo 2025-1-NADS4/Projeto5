@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>Sobre Nós - Comparadrive</title>
+ <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Monoton&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+ <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0e1a2b;
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .titulo {
+      font-family: 'Monoton', cursive;
+      font-size: 64px;
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+
+    .subtitulo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 40px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .descricao {
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+      text-align: left;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .time {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .membro {
+      text-align: center;
+    }
+
+    .membro a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .membro img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 540px;
+      margin-bottom: 10px;
+    }
+
+    .card-beneficios {
+      max-width: 900px;
+      margin: 0 auto 60px auto;
+      padding: 30px;
+      border: 1px solid #B1C9ED;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .card-beneficios h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .card-beneficios p {
+      text-align: center;
+    }
+
+    .beneficios-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .beneficio {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      width: 260px;
+      box-sizing: border-box;
+    }
+
+    .beneficio h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .botao-voltar {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 60px auto;
+      padding: 15px 30px;
+      background-color: #1a75ff;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .footer {
+      padding: 40px 50px;
+      background-color: #0b1522;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      color: white;
+      font-size: 14px;
+    }
+
+    .footer div {
+      margin: 10px 0;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+    }
+ </style>
+</head>
+<body>
+
+ <h1 class="titulo">Comparadrive</h1>
+ <h2 class="subtitulo">Um pouco sobre nós</h2>
+
+ <p class="descricao">
+    Somos alunos do curso de Análise e Desenvolvimento de Sistemas da FECAP – Fundação Escola de Comércio Álvares Penteado. Nosso site tem como objetivo facilitar a vida dos usuários ao comparar os preços dos principais aplicativos de transporte. Sabemos que os valores podem variar de acordo com a região, o horário e a demanda, por isso oferecemos uma ferramenta prática e intuitiva para que você encontre a opção mais acessível para o seu trajeto. Dessa forma, você economiza tempo e dinheiro ao escolher a melhor alternativa para se locomover com conforto e segurança.
+ </p>
+
+ <div class="time">
+    <div class="membro">
+      <a href="https://www.linkedin.com/in/emillydepine/" target="_blank">
+        <img src="/images/foto-emilly.jpg" alt="Emilly Depine">
+        <p>Emilly Depine</p>
+      </a>
+    </div>
+    <div class="membro">
+      <a href="https://www.linkedin.com/in/renan-teixeira-pinheiro-62b550238/" target="_blank">
+        <img src="/images/foto-renan.jpg" alt="Renan Teixeira">
+        <p>Renan Teixeira</p>
+      </a>
+    </div>
+    <div class="membro">
+      <a href="https://www.linkedin.com/in/fernando-jos%C3%A9-dos-santos-a7a449135/" target="_blank">
+        <img src="/images/foto-fernando.jpg" alt="Fernando Santos">
+        <p>Fernando Santos</p>
+      </a>
+    </div>
+    <div class="membro">
+      <a href="https://www.linkedin.com/in/gusthenriques/" target="_blank">
+        <img src="/images/foto-gustavo.jpg" alt="Gustavo Henrique">
+        <p>Gustavo Henrique</p>
+      </a>
+    </div>
+ </div>
+
+ <div class="card-beneficios">
+    <h2>Facilitamos sua escolha de transporte!</h2>
+    <p>Nosso grupo quis criar essa ideia pensando em como a tecnologia pode simplificar escolhas do dia a dia. 
+    Vimos uma oportunidade de ajudar as pessoas a encontrarem a melhor opção de transporte de forma rápida, prática e econômica. 
+    Nosso foco é facilitar, sem complicação.</p>
+    <div class="beneficios-container">
+      <div class="beneficio">
+        <h3>🕘 Praticidade no dia a dia</h3>
+        <p>Esqueça a correria de abrir vários aplicativos. Com nossa ferramenta, você escolhe a melhor opção com muito mais facilidade.</p>
+      </div>
+      <div class="beneficio">
+        <h3>🚗 Compare em segundos</h3>
+        <p>Consulte os preços dos principais apps de transporte de forma rápida e simples, em um só lugar.</p>
+      </div>
+      <div class="beneficio">
+        <h3>💸 Economize mais</h3>
+        <p>Visualize as opções mais baratas para o seu trajeto e evite gastos desnecessários.</p>
+      </div>
+    </div>
+ </div>
+
+ <a href="index.html" class="botao-voltar">← Voltar para a Home</a>
+
+ <footer class="footer">
+    <div>
+      <strong>CD</strong><br>
+      Por Renan Teixeira, <br>
+      Fernando José <br>
+      Emilly Depine<br>
+      Gustavo Henrique.
+    </div>
+    <div>
+      <strong>OFFICE</strong><br>
+      123 Innovation Drive<br>
+      Palo Alto, CA 94301 <br>
+      Silicon Valley, USA
+    </div>
+    <div>
+      <strong>MENU</strong><br>
+      Serviço<br>
+      Parcerias
+    </div>
+    <div>
+      <strong>LINKS</strong><br>
+      <a href="pagina2.html">Sobre Nós</a><br>
+      <a href="#">Contato</a><br>
+      <a href="#">Central de Ajuda</a>
+    </div>
+ </footer>
+
+</body>
+</html>
